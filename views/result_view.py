@@ -18,6 +18,7 @@ class ResultView:
         self.result_canvas = tk.Canvas(master=master, background='grey')
         self.result_frame = ttk.Frame(self.result_canvas, padding=(5, 0))
         self.result_frame_row: int = 0
+        self.result_frame.columnconfigure(1, weight=1)
 
         self.result_scroll = tk.Scrollbar(self.result_canvas, orient="vertical", command=self.result_canvas.yview)
         self.result_canvas.configure(yscrollcommand=self.result_scroll.set)
@@ -37,14 +38,14 @@ class ResultView:
 
     def display_detail_row(self, label: str, value: str):
         row_label = f"{label}:" if label else ''
-        ttk.Label(master=self.result_frame, text=row_label, width=20, anchor=tk.NE
+        ttk.Label(master=self.result_frame, text=row_label, width=25, anchor=tk.NE
                   ).grid(row=self.result_frame_row, column=0, padx=2, pady=2, sticky=tk.W)
         ttk.Label(master=self.result_frame, text=value, width=62, anchor=tk.NW
                   ).grid(row=self.result_frame_row, column=1, padx=2, pady=2, sticky=tk.W)
         self.result_frame_row += 1
 
     def display_detail_heading(self, label: str, anchor: str = tk.W):
-        ttk.Label(master=self.result_frame, text=label, width=20, anchor=anchor, font=self.bold_font
+        ttk.Label(master=self.result_frame, text=label, width=25, anchor=anchor, font=self.bold_font
                   ).grid(row=self.result_frame_row, column=0, padx=2, pady=2, sticky=tk.W)
         ttk.Label(master=self.result_frame, text='', width=62, anchor=tk.NW
                   ).grid(row=self.result_frame_row, column=1, padx=2, pady=2, sticky=tk.W)
